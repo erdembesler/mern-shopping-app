@@ -25,6 +25,9 @@ const INITIAL_STATE = {
   cart: {
     cartItems: cartItemsInLocalStorage,
   },
+  product: {
+    allProducts: [],
+  },
 };
 
 const store = createStore(
