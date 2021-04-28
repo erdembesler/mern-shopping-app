@@ -14,26 +14,28 @@ const addProduct = async (req, res) => {
   const newProduct = new Product(req.body);
   newProduct
     .save()
-    .then(() => res.json(newProduct))
+    .then(() => res.status(200).json(newProduct))
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
 const editProduct = async (req, res) => {
   try {
-    Product.findById(req.params.id).then((product) => {
-      product.name = req.body.name;
-      product.imageUrl = req.body.imageUrl;
-      product.description = req.body.description;
-      product.price = req.body.price;
-      product.countInStock = req.body.countInStock;
+    const { id } = req.params;
 
-      product
-        .save()
-        .then(() => res.json(product))
-        .catch((err) => res.json("Error: " + err));
-    });
+    const { name, imageUrl, description, price, countInStock } = req.body;
 
-    res.json(product);
+    const editedProduct = {
+      name,
+      imageUrl,
+      countInStock,
+      description,
+      price,
+      _id: id,
+    };
+
+    await Product.findByIdAndUpdate(id, editedProduct, { new: true });
+
+    res.json(editedProduct);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -44,8 +46,6 @@ const deleteProduct = async (req, res) => {
     Product.findByIdAndDelete(req.params.id)
       .then(() => res.json("Product deleted"))
       .catch((err) => res.status(400).json("Error: " + err));
-
-    res.json(product);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });

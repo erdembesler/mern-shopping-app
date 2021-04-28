@@ -18,42 +18,6 @@ export const getProductsReducer = (state = { products: [] }, action) => {
         loading: false,
         error: action.payload,
       };
-    default:
-      return state;
-  }
-};
-
-export const getProductDetailsReducer = (state = { product: {} }, action) => {
-  switch (action.type) {
-    case actionTypes.GET_PRODUCT_DETAILS_REQUEST:
-      return {
-        loading: true,
-      };
-    case actionTypes.GET_PRODUCT_DETAILS_SUCCESS:
-      return {
-        loading: false,
-        product: action.payload,
-      };
-    case actionTypes.GET_PRODUCT_DETAILS_FAIL:
-      return {
-        loading: false,
-        error: action.payload,
-      };
-    case actionTypes.GET_PRODUCT_DETAILS_RESET:
-      return {
-        product: {},
-      };
-    default:
-      return state;
-  }
-};
-
-const PRODUCT_INITIAL_STATE = {
-  products: [],
-};
-
-export const productDetail = (state = PRODUCT_INITIAL_STATE, action) => {
-  switch (action.type) {
     case actionTypes.ADD_PRODUCT:
       const newProduct = new Product(
         action.payload.id,
@@ -91,6 +55,31 @@ export const productDetail = (state = PRODUCT_INITIAL_STATE, action) => {
         products: state.products.filter((product) => product.id !== action.id),
       };
 
+    default:
+      return state;
+  }
+};
+
+export const getProductDetailsReducer = (state = { product: {} }, action) => {
+  switch (action.type) {
+    case actionTypes.GET_PRODUCT_DETAILS_REQUEST:
+      return {
+        loading: true,
+      };
+    case actionTypes.GET_PRODUCT_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        product: action.payload,
+      };
+    case actionTypes.GET_PRODUCT_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actionTypes.GET_PRODUCT_DETAILS_RESET:
+      return {
+        product: {},
+      };
     default:
       return state;
   }

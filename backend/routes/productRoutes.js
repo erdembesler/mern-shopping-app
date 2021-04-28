@@ -9,9 +9,9 @@ const {
 } = require("../controller/productControllers");
 
 router.get("/", getProducts);
+router.post("/add", addProduct);
 router.get("/:id", getProductById);
-router.post("/", addProduct);
-router.post("/update/:id", editProduct);
 router.delete("/:id", deleteProduct);
+router.patch("/update/:id", editProduct);
 
 module.exports = router;

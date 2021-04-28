@@ -25,17 +25,16 @@ export const getProducts = () => async (dispatch) => {
 //addProduct
 export const createProduct = (newProduct) => async (dispatch) => {
   try {
-    const response = await axios.create("/api/products/", newProduct);
-    const resData = await response.json();
+    const response = await axios.post("/api/products/add", newProduct);
     dispatch({
       type: actionTypes.ADD_PRODUCT,
       payload: {
-        id: resData._id,
-        name: resData.name,
-        description: resData.description,
-        countInStock: resData.countInStock,
-        imageUrl: resData.imageUrl,
-        price: resData.price,
+        id: response.data._id,
+        name: response.data.name,
+        description: response.data.description,
+        countInStock: response.data.countInStock,
+        imageUrl: response.data.imageUrl,
+        price: response.data.price,
       },
     });
   } catch (error) {
@@ -44,17 +43,14 @@ export const createProduct = (newProduct) => async (dispatch) => {
 };
 
 //editProduct
-export const updateProduct = (updatedProduct) => async (dispatch) => {
+export const updateProduct = (id, updatedProduct) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      `/api/products/${updatedProduct.id}`,
-      updatedProduct
-    );
-    const resData = await response.json();
+    await axios.patch(`/api/products/update/${id}`, updatedProduct);
+
     dispatch({
       type: actionTypes.UPDATE_PRODUCT,
       payload: {
-        id: resData._id,
+        id: id,
         name: updatedProduct.name,
         description: updatedProduct.description,
         countInStock: updatedProduct.countInStock,
