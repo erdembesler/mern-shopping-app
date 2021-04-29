@@ -1,21 +1,38 @@
 import "./ProductScreen.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 // Actions
 import { getProductDetails } from "../redux/actions/productActions";
 import { addToCart } from "../redux/actions/cartActions";
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const ProductScreen = ({ match, history }) => {
+  console.log(match);
+  debugger;
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.getProductDetails);
   const { loading, error, product } = productDetails;
+  const [openAlert, setOpenAlert] = useState(false);
 
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAlert(false);
+  };
   useEffect(() => {
     if (product && match.params.id !== product._id) {
       dispatch(getProductDetails(match.params.id));
+    }
+    if (match.params.newProduct == "new") {
+      setOpenAlert(true);
     }
   }, [dispatch, match, product]);
 
@@ -73,6 +90,15 @@ const ProductScreen = ({ match, history }) => {
           </div>
         </>
       )}
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert onClose={handleCloseAlert} severity="success">
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

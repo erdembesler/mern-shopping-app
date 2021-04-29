@@ -1,5 +1,6 @@
 import * as actionTypes from "../constants/productConstants";
 import axios from "axios";
+import { PromiseProvider } from "mongoose";
 
 export const getProducts = () => async (dispatch) => {
   try {
@@ -37,6 +38,7 @@ export const createProduct = (newProduct) => async (dispatch) => {
         price: response.data.price,
       },
     });
+    return response.data._id;
   } catch (error) {
     throw new Error("Something went wrong!");
   }

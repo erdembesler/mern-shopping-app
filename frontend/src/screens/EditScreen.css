@@ -1,0 +1,42 @@
+.container {
+  padding: 10px 20px;
+}
+.input__container {
+  margin-bottom: 20px;
+}
+.inputfield__div {
+  margin-top: 20px;
+  padding: 10px 20px;
+
+  display: flex;
+  justify-content: center;
+}
+.input {
+  width: 50%;
+}
+.priceCIS__div {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+.inputPrice {
+  width: 45%;
+}
+.inputCountInStock {
+  width: 45%;
+}
+.buttons__div {
+  display: flex;
+  padding: 0px 10px;
+  justify-content: center;
+}
+.crudButton {
+  display: "block";
+
+  width: 120px;
+  margin-right: 10px;
+}
+
+.MuiButtonBase-root {
+  margin: 10px;
+}
