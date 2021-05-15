@@ -1,6 +1,7 @@
 import "./HomeScreen.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@material-ui/core";
 
 // Components
 import Product from "../components/Product";
@@ -23,7 +24,7 @@ const HomeScreen = () => {
       <h2 className="homescreen__title">Latest Products</h2>
       <div className="homescreen__products">
         {loading ? (
-          <h2>Loading...</h2>
+          <CircularProgress />
         ) : error ? (
           <h2>{error}</h2>
         ) : (

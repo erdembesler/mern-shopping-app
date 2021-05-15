@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { CircularProgress } from "@material-ui/core";
 
 // Actions
 import { getProductDetails } from "../redux/actions/productActions";
@@ -31,7 +32,7 @@ const ProductScreen = ({ match, history }) => {
     if (product && match.params.id !== product._id) {
       dispatch(getProductDetails(match.params.id));
     }
-    if (match.params.newProduct == "new") {
+    if (match.params.newProduct === "new") {
       setOpenAlert(true);
     }
   }, [dispatch, match, product]);
@@ -44,7 +45,7 @@ const ProductScreen = ({ match, history }) => {
   return (
     <div className="productscreen">
       {loading ? (
-        <h2>Loading...</h2>
+        <CircularProgress />
       ) : error ? (
         <h2>{error}</h2>
       ) : (

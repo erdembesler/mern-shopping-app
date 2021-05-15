@@ -1,7 +1,7 @@
 import "./EditScreen.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, CircularProgress } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
@@ -125,7 +125,7 @@ const EditScreen = (props) => {
   return (
     <div className="container">
       {loading ? (
-        <h2>Loading...</h2>
+        <CircularProgress />
       ) : error ? (
         <h2>{error}</h2>
       ) : (

@@ -99,3 +99,25 @@
     margin: 0;
   }
 }
+
+.widget {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: red;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+/* CSS BEM */
+.search__tweet--error {
+}
+
+.left-block {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: black;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
